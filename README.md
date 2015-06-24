@@ -79,8 +79,21 @@
 
 博客系统（ONE）第一版完成。。
 
-截图
-<img src='' />
+# 截图:
+<img src='https://github.com/lichaojacobs/ONE_Blog/blob/master/pageImage/1.png' />
+
+<img src='https://github.com/lichaojacobs/ONE_Blog/blob/master/pageImage/2.png' />
+
+<img src='https://github.com/lichaojacobs/ONE_Blog/blob/master/pageImage/3.png' />
+
+<img src='https://github.com/lichaojacobs/ONE_Blog/blob/master/pageImage/4.png' />
+
+<img src='https://github.com/lichaojacobs/ONE_Blog/blob/master/pageImage/5.png' />
+
+
+
+
+
 
 
 	
