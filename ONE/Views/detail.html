@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>一个博客</title>
+
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" type="text/css" href="/stylesheet/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheet/detail.css">
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="/">一个博客</a>	
+		</div>
+		<div class="navbar-collapse collapse navbar-left">
+			<ul class="nav navbar-nav">
+				<li><a href="/">首页</a></li>
+				<li><a href="#">归档</a></li>
+			</ul>
+			<form class="navbar-form navbar-left">
+				<div class="form-group">
+				    <input type="text" class="form-control" placeholder="博文搜索">
+				</div>
+				<button type="submit" class="btn btn-default">搜索</button>
+			</form>
+		</div>
+		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#">Yong</a></li>
+				<li><a href="#">注销</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="container">
+	<div class="row">
+		<div class="col-md-8">
+			<article class="article">
+				<h1 class="article-title">Getting Started with ASP.NET MVC 5</h1>
+				<p class="article-meta">
+					由 <a href="#">Rick Anderson</a> 发自 2015-03-26 19:32
+				</p>
+				<div class="article-body">
+					<blockquote>
+						This tutorial will teach you the basics of building an ASP.NET MVC 5 Web application using Visual Studio 2013. A VB version of this tutorial can be found at Mikesdotnetting.  A Visual Web Developer project with C# source code is available to accompany this topic. Download the C# version.
+						<br><br>
+						In the tutorial you run the application in Visual Studio. You can also make the application available over the Internet by deploying it to a hosting provider. Microsoft offers free web hosting for up to 10 web sites in a free Azure trial account. This tutorial was written by Scott Guthrie (twitter @scottgu ), Scott Hanselman  (twitter: @shanselman ), and Rick Anderson ( @RickAndMSFT )
+					</blockquote>
+					<h3>Getting Started</h3>
+					<p>Start by installing and running Visual Studio Express 2013 for Web or Visual Studio 2013.</p>
+					<p>Visual Studio is an IDE, or integrated development environment. Just like you use Microsoft Word to write documents, you'll use an IDE to create applications. In Visual Studio there's a toolbar along the top showing various options available to you. There's also a menu that provides another way to perform tasks in the IDE. (For example, instead of selecting New Project from the Start page, you can use the menu and select File > New Project.)</p>
+					<h3>Creating Your First Application</h3>
+					<p>Click New Project, then select Visual C# on the left, then Web and then select ASP.NET  Web Application. Name your project "MvcMovie" and then click OK.</p>
+					<p>In the New ASP.NET Project dialog, click MVC and then click OK.</p>
+					<p>Visual Studio used a default template for the ASP.NET MVC project you just created, so you have a working application right now without doing anything! This is a simple "Hello World!" project, and it's a good place to start your application.</p>
+					<p>Click F5 to start debugging. F5 causes Visual Studio to start IIS Express and run your web app. Visual Studio then launches a browser and opens the application's home page. Notice that the address bar of the browser says localhost:port# and not something like example.com. That's because localhost always points to your own local computer, which in this case is running the application you just built. When Visual Studio runs a web project, a random port is used for the web server. In the image below, the port number is 1234. When you run the application, you'll see a different port number.</p>
+					<p>Right out of the box this default template gives you  Home, Contact and About pages. The image above doesn't show the Home, About and Contact links. Depending on the size of your browser window, you might need to click the navigation icon to see these links.</p>
+					<p>The application also provides support to register and log in. The next step is to change how this application works and learn a little bit about ASP.NET MVC. Close the ASP.NET MVC application and let's change some code.</p>
+				</div>
+			</article>
+			<article class="article">
+				<h3>评论</h3>
+				<div class="comments">
+					<div class="comments-item">The application also provides support to register and log in. The next step is to change how this application works and learn a little bit about ASP.NET MVC. Close the ASP.NET MVC application and let's change some code.
+					</div>
+				</div>
+			</article>
+		</div>
+		<div class="col-md-3">
+			<div class="sidebar-notice">
+				<h4>博主简介</h4>
+				<p>Rick Anderson，Web Developer, @Microsoft.</p>
+			</div>
+			<div class="sidebar-notice" style="margin-top: 15px;">
+				<h4>相关博客</h4>
+				<ol>
+					<li><a href="#">.NET MVC 入门篇 01</a></li>
+					<li><a href="#">CSS3 从入门到精通</a></li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="/javascript/jquery.min.js"></script>
+<script type="text/javascript" src="/javascript/bootstrap.min.js"></script>
+</body>
+</html>

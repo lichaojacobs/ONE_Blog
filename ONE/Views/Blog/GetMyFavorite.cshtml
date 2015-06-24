@@ -1,0 +1,263 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.title = "我关注的";
+
+}
+<style type="text/css">
+    element.style {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    *[hidefocus] {
+        outline: none;
+    }
+
+    *[hidefocus] {
+        outline: none;
+    }
+
+    .w-top {
+        opacity: 0;
+        filter: alpha(opacity=0);
+        transition: opacity 0.3s;
+        -webkit-transition: opacity 0.3s;
+        -moz-transition: opacity 0.3s;
+        -o-transition: opacity 0.3s;
+    }
+
+    .w-top {
+        position: fixed;
+        _position: absolute;
+        right: 30px;
+        bottom: 30px;
+        z-index: 79;
+        width: 50px;
+        height: 50px;
+        overflow: hidden;
+        text-indent: -2000px;
+        background-position: 0 -934px;
+    }
+
+    .w-top {
+        background: url(/Content/assets/up.png);
+    }
+
+    *[hidefocus] {
+        outline: none;
+    }
+</style>
+
+
+
+
+
+@model IEnumerable<ONE.Models.BlogViewModel>
+
+
+<link href="~/Content/stylesheet/main.css" rel="stylesheet" />
+<link href="~/Content/stylesheet/css1.css" rel="stylesheet" />
+
+
+<div class="container">
+    <div class="row">
+        @if(Model.Count()!=0)
+        { 
+        <div class="col-md-8">
+            @foreach (var m in Model)
+            {
+
+                <article class="article-item">
+                    @Html.Hidden("blogId" + @m.blogId, @m.blogId)
+                    <h1><a class="article-title" href="/detail.html">@m.标题</a></h1>
+                    @*<p class="article-meta">
+                            由 <a href="#">@m.用户名</a> 发自 @m.发布时间
+                        </p>*@
+
+
+                    <div class="article-body">
+
+
+
+                        @Html.Raw(@HttpUtility.HtmlDecode(m.正文))
+
+                        @*@m.正文*@
+
+                    </div>
+                    <!-- <span class="article-more">
+                        <a href="/detail.html">more >></a>
+                    </span> -->
+                    <a class="button button-raised button-inverse" href="/Blog/BlogDetail?id=@m.blogId&userName=@m.用户名">Read More</a>
+                    @*<label>点赞数：@m.点赞数</label>*@
+
+                    <div class="info box">
+                        由 <a href="/Blog/GetPersonalPage?userEmail=@m.博主邮箱">@m.用户名</a>
+                        发自&nbsp;&nbsp;
+                        <a class="date" href="#">@m.发布时间</a>
+
+                        <a class="hot" id="hittag @m.blogId" onclick="clickHit(@m.blogId)">@m.点赞数</a>
+                    </div>
+
+
+                </article>
+
+            }
+
+
+        </div>
+        }
+        else
+        { 
+            
+            <div class="col-md-8">
+                <article class="article-item">
+
+                    <h2>暂无关注的人    <a href="/Home/GetUsers" class="btn btn-link" style="font-weight:bold">前往关注</a></h2>
+                </article>
+             </div>
+        
+        }
+
+        <div class="col-md-3">
+            <div class="sidebar-notice">
+                <h4>站点通知</h4>
+                <p>博客刚刚建站，欢迎跟朋友们推荐我们哟~</p>
+            </div>
+            <div id="side-notice" class="sidebar-notice" style="margin-top: 20px;">
+                <h4>热门推荐</h4>
+                <ol id="hot-list">
+                    <li><a id="hotBlog1" href="#"></a></li>
+                    <li><a id="hotBlog2" href="#"></a></li>
+                </ol>
+                <p style="float:right">
+
+                    <a class="glyphicon glyphicon-refresh" onclick="loadHot()">换一换</a>
+                </p>
+
+
+            </div>
+
+            <div class="sidebar-notice" style="height:80px;padding:20px 80px;margin-top:20px;">
+                <div style="margin:0 auto">
+                    <a role="button" class="btn  btn-primary" href="/Home/GetUsers">关注更多</a>
+                </div>
+            </div>
+        </div>
+
+
+        <a title="回到顶部" class="w-top" href="#" id="gtotop" hidefocus="true" style="visibility: visible; opacity: 1;">回到顶部</a>
+
+
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    window.onload = function () {
+
+
+        //加载热门文章
+        loadHot();
+
+    };
+
+    function getCookie() {
+
+
+        var strcookie = document.cookie;
+        var arr = strcookie.split(';');
+        for (var i = 0; i < arr.length; i++) {
+            var arrstr = arr[i].split('=');//对各个cookie值进行分割
+            if (arrstr[0] == " pageIndex")
+                return arrstr[1];//如果存在返回cookie值
+
+
+        }
+        return "";
+
+
+    }
+
+    function getCookieCommon(){
+
+        var strcookie = document.cookie;
+        var arr = strcookie.split(';');
+        for (var i = 0; i < arr.length; i++) {
+            var arrstr = arr[i].split('=');//对各个cookie值进行分割
+            if (arrstr[0] == " hotPageIndex")
+                return arrstr[1];//如果存在返回cookie值
+
+
+        }
+
+        return "";
+
+    }
+
+    function clickHit(id) {
+
+
+        var currentNumber = document.getElementById("hittag "+id).innerHTML;
+        var blogId = document.getElementById("blogId"+id).value;
+        $.post("/Common/clickHit", { "blogId": blogId, "currentNumber": currentNumber }, function (data, status) {
+
+            if (data != "false") {
+
+                if(data!="-1")
+                {
+
+                    document.getElementById("hittag "+id).innerHTML = data;
+                }
+                else
+                {
+                    alert("未登录用户，请先登录！");
+                    window.location.href="/Home/Login";
+                }
+
+            }
+
+
+        })
+
+
+
+
+
+
+
+
+
+    }
+
+
+    function loadHot()
+    {
+
+        // alert(document.cookie);
+
+        //获取当前推荐的页数
+        var page=getCookieCommon("hotPageIndex");
+
+        $.post("/Common/loadHot", { "page": page }, function (data, status) {
+
+            //获取从后台返回的sjon数据格式
+            var list = eval(data);
+
+            //修改第一个推荐位的数据
+            var link1 = document.getElementById("hotBlog1");
+            link1.setAttribute("href", "/Blog/BlogDetail?id=" + list[0].blogId + "&" + "userName=" + list[0].用户名);
+            link1.innerHTML = list[0].标题;
+
+
+            //修改第二个推荐位的数据
+
+            var link2 = document.getElementById("hotBlog2");
+            link2.setAttribute("href", "/Blog/BlogDetail?id=" + list[1].blogId + "&" + "userName=" + list[1].用户名);
+            link2.innerHTML = list[0].标题;
+        })
+
+
+    }
+
+
+</script>

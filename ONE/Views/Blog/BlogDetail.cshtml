@@ -1,0 +1,365 @@
+﻿
+@{
+    ViewBag.Title = "BlogDetail";
+}
+<link href="~/Content/stylesheet/detail.css" rel="stylesheet" />
+<link href="~/Content/stylesheet/css1.css" rel="stylesheet" />
+
+
+
+
+
+@model ONE.Models.BlogDetailModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <article class="article">
+                <h1 class="article-title">@Model.blogDeail.标题</h1>
+                <p class="article-meta">
+                    由 <a href="/Blog/GetPersonalPage?userEmail=@Model.blogDeail.博主邮箱">@Model.blogDeail.用户名</a> 发自 @Model.blogDeail.发布时间
+                </p>
+                <p>
+                    <b>标签:</b> @Model.blogDeail.标签
+                </p>
+                <div class="article-body">
+                    @Html.Raw(@HttpUtility.HtmlDecode(Model.blogDeail.正文))
+                </div>
+
+            </article>
+           
+             <article class="article">
+                <h3>评论
+                
+                     @if (@Model.remarks == null)
+                     { 
+                        <small style="color:red">(0)</small>
+                     }
+                     else
+                     {
+                        <small style="color:red">(@Model.remarks.Count())</small>
+
+                     }
+                    
+                 
+                 
+                 
+                 </h3>
+                 <form action="/Blog/AddComments" method="post">
+                     @Html.HiddenFor(m => m.blogDeail.blogId)
+                     <div class="submitremark" style="padding: 20px 30px 30px 40px;">
+
+                         <div class="remarktextarea">
+
+                             <textarea class="form-control"id="remarkcontent" name="remarkcontent" onblur="checkremark()" placeholder="添加评论" rows="3"></textarea>
+
+                         </div>
+
+                         <div class="btnsubmit">
+                             <input type="submit" class="btn btn-primary" />
+                         </div>
+
+
+                     </div>
+
+                 </form>
+
+                <div class="comments">
+                @foreach (var i in Model.remarks)
+                {
+                    <div class="comments-item" id="comments-item @i.remarkId">
+                        @i.remarkConetent
+                        <p class="author"><img src="@i.remarkUserLogo" height="25" width="25"> @i.remarkUser :&nbsp;</p>
+                        <br/>
+                        <input class="showreply" type="hidden" value="@i.remarkId"/>
+                        <div style="float:right">
+                            <a class="replyremark" id="loadreply @i.remarkId" onclick="loadreply(@i.remarkId)">加载回复</a>
+
+                            <a class="replyremark" id="replylink @i.remarkId" onclick="showform(@i.remarkId)">回复</a>
+                        </div>
+
+                        <div id="reply_form @i.remarkId" style="display:none;">
+                            <input class="form-control" id="remark @i.remarkId" placeholder="回复 @i.remarkUser"  value="" />
+                            <div class="btnsubmit">
+                                <input type="button" value="提交" class="btn btn-primary" onclick="clicktoreply('@i.remarkUser' ,@i.remarkId)" />
+                            </div>
+
+                        </div>
+
+                    </div>
+                }   
+                    
+                </div>
+               
+            </article>
+                
+                 
+        </div>
+
+        <div class="col-md-3">
+            <div class="sidebar-notice">
+                <h4>博主简介</h4>
+                <p>@ViewBag.username，Web Developer.</p>
+            </div>
+            <div class="sidebar-notice" style="margin-top: 15px;">
+                <h4>相关博客</h4>
+                <ol>
+                    <li><a href="#">.NET MVC 入门篇 01</a></li>
+                    <li><a href="#">CSS3 从入门到精通</a></li>
+                </ol>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+@*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="mdo">
+    Open modal for mdo</button>*@
+
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">新回复</h4>
+            </div>
+            <form action="/Common/replyToReply" method="post">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">回复给:</label>
+                        <input type="text" name="replyTo" class="form-control" id="recipient-name">
+                    </div>
+                    <input class="remarkid" type="hidden" name="remarkId" />
+                    <input class="remarkusername" type="hidden" name="remarkUserName" />
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">内容:</label>
+                        <textarea class="form-control" name="remarkContent" id="message-text"></textarea>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary">提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+
+
+    //动态加载评论的评论
+    $(document).ready(function () {
+
+        var elements = document.getElementsByClassName('showreply');
+
+        for (var i = 0; i < elements.length; i++)
+        {
+
+            var id = elements[i].value;
+            //加载评论回复
+            loadreply(id);
+
+        }
+        
+
+
+
+    })
+
+    function checkremark(){
+        
+        var text = document.getElementById("remarkcontent");
+        if (text.value == "")
+            alert("评论不能为空");
+    
+    }
+
+    function showform(remarkid) {
+
+        
+
+        var link = document.getElementById("replylink "+remarkid);
+        if (link.innerHTML == "回复") {
+            var form = document.getElementById("reply_form "+remarkid);
+            form.style.display = "block";
+            link.innerHTML = "收起";
+        }
+        else {
+
+            document.getElementById("reply_form "+remarkid).style.display = "none";
+            link.innerHTML = "回复";
+
+
+        }
+
+
+
+        
+        
+
+    }
+
+    function clicktoreply(remarkUserName,remarkid) {
+
+        var input = document.getElementById("remark " + remarkid);
+        var text = input.value;
+        if (text == "") {
+
+            alert("评论不能为空");
+
+        }
+        else {
+            $.post("/Common/makeReply", { "remarkId": remarkid,"remarkUserName":remarkUserName , "remarkContent": text }, function (data, status) {
+            
+                                  
+                if (data != "false")
+                {
+                    alert("回复成功！");
+                    document.getElementById("reply_form "+remarkid).style.display = "none";
+
+                    ////解析数据
+                    //var obj=eval(data);
+                   
+                    //document.getElementById("replys "+remarkid).removeChild();
+                    ////重新加载
+                    
+                 
+
+                    ////将回复框重新设置为可见
+                    //thewhole.style.display = "block";
+                    //document.getElementById("loadreply "+remarkid).innerHTML = "收起回复";
+                    //var comments = document.getElementById("comments-item "+remarkid);
+
+                    window.location.href="/Blog/BlogDetail?id="+@Model.blogDeail.blogId.ToString()+"";
+
+                    //添加一条数据
+                    //var div = document.createElement("div");
+                    //div.innerHTML = "&nbsp;&nbsp;" + obj.评论人ID + "<font color='red'> " + "回复" + obj.回复至ID + ":" + "</font>" + obj.回复内容;
+                    //div.className = "comments-item";
+
+                    //var p = document.createElement("p");
+
+                    //p.className = "author";
+
+                    //p.innerHTML = Date(obj.回复时间);
+
+                    //div.appendChild(p);
+
+                    //thewhole.appendChild(div);
+
+                    //comments.appendChild(thewhole);
+
+                   
+                    
+
+                }
+            
+            })
+
+        }
+
+
+    }
+
+
+    function loadreply(remarkid) {
+
+        //首先获取链接中的innerhtml
+        var load=document.getElementById("loadreply "+remarkid);
+        var text=load.innerHTML;
+        
+        if(text=="加载回复")
+        {
+
+            //获取id 为 reply的div块
+            var replydiv=document.getElementById("replys "+remarkid);
+           // alert(replydiv);
+            if(replydiv==null)
+            {
+
+                $.post("/Common/loadReply", { "remarkId": remarkid }, function (data, status) {
+                    var list = eval(data);
+                    
+                    var thewholediv = document.createElement("div");
+                    var comments = document.getElementById("comments-item "+remarkid);
+                    thewholediv.id="replys "+remarkid;
+
+                    for (var i = 0; i < list.length; i++)
+                    {
+                        
+
+                        var div = document.createElement("div");
+                        div.innerHTML = "<br/>&nbsp;&nbsp;" + list[i].评论人ID + "<font color='red'> " + "回复" +
+                            list[i].回复至ID + ":" + "</font>" + list[i].回复内容 +
+        /// 评论回复
+         "<div><a type='button' class='btn btn-xs btn-primary' data-toggle='modal' data-remarkid='" + list[0].评论ID + "' data-target='#exampleModal' data-whatever='" + list[0].评论人ID + "'style='float:right' id='" + list[0].T013_replyId + "'>回复</a></div>";
+                        div.className = "comments-item";
+
+                        var p = document.createElement("p");
+                
+                        p.className = "author";
+
+                        p.innerHTML =list[i].回复时间;
+                        
+                
+                        div.appendChild(p);
+                
+                        thewholediv.appendChild(div);
+
+                    }
+
+                    comments.appendChild(thewholediv);
+
+                })
+            }
+            else
+            {
+
+
+                document.getElementById("loadreply "+remarkid).innerHTML="收起回复";
+                replydiv.style.display="block";
+                
+            
+            }
+
+        }
+        else
+        {
+
+            var replydiv=document.getElementById("replys "+remarkid);
+            replydiv.style.display="none";
+            document.getElementById("loadreply "+remarkid).innerHTML="加载回复";
+        
+        }
+
+
+
+    }
+
+
+    $('#exampleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var recipient = button.data('whatever') // Extract info from data-* attributes
+        var remarkid = button.data('remarkid')
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        modal.find('.modal-title').text('新回复给 ' + recipient)
+        modal.find('.modal-body input').val(recipient)
+        modal.find('.remarkid').val(remarkid)
+        modal.find('.remarkusername').val(recipient)
+    })
+
+</script>
+

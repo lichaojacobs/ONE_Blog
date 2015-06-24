@@ -1,0 +1,127 @@
+﻿@{
+    ViewBag.Title = "ONE --写博客";
+}
+
+@model  ONE.Models.BlogViewModel
+
+
+
+<script src="~/Content/ckeditor/ckeditor.js"></script>
+<script src="~/Content/ckeditor/config.js"></script>
+<script src="~/Content/ckeditor/styles.js"></script>
+<script type="text/javascript">
+    function submit() {
+
+        biaoti = document.getElementById("biaoti").value;
+        biaoqian = document.getElementById("biaoqian").value;
+        //ispublic = document.getElementById("ispublic").value;
+        var checkbox = document.getElementsByName("ispublic");
+        for (var i = 0; i < checkbox.length; i++)
+        {
+            if (checkbox[i].checked == true)
+                ispublic = checkbox[i].nodeValue;
+
+        }
+        
+        zhengwen = CKEDITOR.instances.editor1.document.getBody().getHtml();
+
+        /*  var editor = CKEDITOR.replace("editor1");
+               editor.document.getBody().getText(); //取得纯文本
+               editor.document.getBody().getHtml(); //取得html文本
+               var valText = CKEDITOR.instances.editor1.EditorDocument.body.innerText(); */
+        //测试正文是否存在
+        //alert(zhengwen);
+        //测试是否公开存在否
+
+        var ispublic;
+        for (var i = 0; i < checkbox.length; i++)
+        {
+            if (checkbox[i].checked == true)
+            {
+                ispublic = checkbox[i].value;
+
+            }
+
+        }
+
+        //alert(ispublic);
+
+
+        //zhengwen = HtmlEncode(zhengwen);
+        $.post("/Blog/WriteBlog", { "正文": zhengwen, "标签": biaoqian, "是否公开": ispublic, "标题": biaoti }, function (data, status) {
+
+            if (data == "true") {
+
+                
+                //暂时回到博客首页，应该回到列表页
+                window.top.location.href = "/Blog/Index";
+            }
+            else {
+
+                alert("博客创建存在错误");
+
+            }
+        }
+         )
+    };
+
+
+   
+</script>
+<link href="~/Content/ckeditor/contents.css" rel="stylesheet" />
+<link href="~/Content/stylesheet/writeblog.css" rel="stylesheet" />
+@*@using(Html.BeginForm("WriteBlog", "Blog"))
+    {*@
+<div class="container">
+    <div class="content">
+        <div class="">
+
+            <div class="">
+
+
+
+                <div class="writearea">
+
+                    <div>
+                        <label style="font-size:15px;">博文标题</label>
+
+                        @*@Html.TextBoxFor(Model => Model.标题, new { @class = "form-control", placeholder = "博文标题" })*@
+                        <input class="form-control" type="text" id="biaoti" name="biaoti" value="" placeholder="博文标题" />
+                    </div>
+                    <div>
+                        <label style="font-size:15px;">博文标签</label>
+
+                        <input class="form-control" type="text" value="" id="biaoqian" name="biaoqian" placeholder="博文标签(逗号隔开)" />
+                        @*@Html.TextBoxFor(Model => Model.标签, new { @class="form-control",placeholder="博文标签（逗号隔开）"})*@
+                    </div>
+                    <label for="editor1">
+                        正文:
+                    </label>
+                    <textarea class="ckeditor" cols="50" id="editor1" name="editor1" rows="10"></textarea>
+                    @*@Html.TextAreaFor(Model => Model.正文, new { @class="ckeditor",id="editor1",cols="50",rows="10"})*@
+                </div>
+
+                <div>
+                    <label>是否公开：</label>
+                    @*@Html.CheckBoxFor(Model => Model.是否公开)*@
+                    
+                    <input type="checkbox" value="true" id="ispublic" name="ispublic" />是
+                    <input type="checkbox" value="false" id="ispublic" name="ispublic" />否
+
+
+                </div>
+
+                <input type="submit" class="btn-primary" style="border-radius:5px;width:100px;height:40px" value="确定提交" onclick="submit()" />
+
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+
+</div>
+

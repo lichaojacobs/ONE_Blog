@@ -1,0 +1,75 @@
+body {
+	padding-top: 70px;
+	background: #eee;
+}
+
+.sidebar-notice {
+	padding: 15px;
+	background-color: #fff;
+	border-radius: 4px;
+	border-bottom: 1px solid #ddd;
+}
+
+.submitremark {
+    padding: 20px 30px 30px 40px;
+
+
+
+}
+
+.btnsubmit {
+    padding:10px;
+    text-align:right;
+
+}
+
+.replyremark {
+ 
+   float:right;
+
+   padding:5px;
+
+
+}
+
+
+.article {
+	margin: 0px 40px 30px 40px;
+	padding: 20px 30px 30px 30px;
+	background: #fff;
+	border-bottom: 1px solid #ddd;
+}
+
+.article-title {
+	font-weight: normal;
+	margin-bottom: 10px;
+	font-size: 30px;
+}
+
+.article-meta {
+	margin-bottom: 20px;
+	color: #999;
+}
+
+.article-body {
+	font-size: 16px;
+}
+
+.comments {
+	margin-top: 10px;
+}
+
+.comments-item {
+	padding: 25px 20px;
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+}
+    .comments-item .author {
+
+        position:relative;
+        float:left;
+        color:grey;
+        font-weight:bold;
+
+
+    }

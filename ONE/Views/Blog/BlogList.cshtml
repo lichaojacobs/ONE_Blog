@@ -1,0 +1,127 @@
+﻿
+@{
+    ViewBag.Title = "BlogList";
+}
+
+@model IEnumerable<ONE.Models.BlogViewModel>
+
+
+<link href="~/Content/stylesheet/main.css" rel="stylesheet" />
+<link href="~/Content/stylesheet/css1.css" rel="stylesheet" />
+
+
+<div class="container">
+    <div class="" style="width:70%;margin:0 auto">
+        <div class="" style="margin:0 auto;">
+            @foreach (var m in Model)
+            {
+
+                <article class="article-item">
+                    <h1><a style="font-weight:200;font-size:20px;margin-bottom:20px" href="/Blog/BlogDetail?id=@m.blogId">@m.标题</a></h1>
+                    <p class="article-meta" style="position:relative;float:right">
+                        由 <a href="#">@m.用户名</a> 发自 @m.发布时间
+                    </p>
+                    
+                    <!-- <span class="article-more">
+                        <a href="/detail.html">more >></a>
+                    </span> -->
+                    <label style="font-weight:normal">点赞数：@m.点赞数</label>
+
+
+                </article>
+
+            }
+
+         
+        </div>
+
+      
+
+
+
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+    window.onload = function () {
+
+        $.post("/Common/GetBlogsPageCount", null, function (data, status) {
+
+            if (data != 0) {
+                var pageHelper = document.getElementById("pagination");
+                var nowPageindex = getCookie();
+                //测试nowpageindex是否存在
+                //alert(nowPageindex);
+
+                for (var i = 1; i <= data; i++) {
+
+
+
+                    var li = document.createElement("li");
+
+                    li.innerHTML = "<a href='" + "/Blog/GetPageIndex?page=" + i + "'>" + i + "</a>";
+                    if (i == parseInt(nowPageindex))
+                        li.setAttribute("class", "active");
+                    //li.setAttribute("class", "active");
+                    pageHelper.appendChild(li);
+
+
+
+
+                }
+                var after = document.createElement("li");
+                after.innerHTML = " <a href='#' aria-label='Next'><span aria-hidden='true'>&raquo;</span> </a>"
+                pageHelper.appendChild(after);
+
+
+
+            }
+
+        })
+
+
+    };
+
+    function getCookie() {
+
+        //var pageindex = document.cookie.indexOf("pageindex" + "=");
+        //if (pageindex != -1) {
+        //    pageindex = pageindex + "pageindex".length + 1;//加一表示等号
+        //    c_end = document.cookie.indexOf(";", pageindex);//指定的开始索引的位置
+        //    if (c_end == -1)
+        //        c_end = document.cookie.length;
+        //    return unescape(document.cookie.substring(pageindex, c_end));
+
+        //}
+
+        var strcookie = document.cookie;
+        var arr = strcookie.split(';');
+        for (var i = 0; i < arr.length; i++) {
+            var arrstr = arr[i].split('=');//对各个cookie值进行分割
+            if (arrstr[0] == "pageindex")
+                return arrstr[1];//如果存在返回cookie值
+
+
+        }
+
+
+
+        return "";
+
+
+    }
+
+
+
+
+
+</script>
+
+
+
+
+
+

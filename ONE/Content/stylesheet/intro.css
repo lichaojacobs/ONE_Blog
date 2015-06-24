@@ -1,0 +1,27 @@
+body {
+	height: 100%;
+	width: 100%;
+	background: url('../assets/intro-bg.png');
+}
+
+.wrapper {
+	padding-top: 150px;
+	text-align: center;
+}
+
+.title {
+	font-size: 45px;
+	line-height: 50px;
+	font-weight: 100;
+	color: #ddd;
+}
+
+.slogan {
+	font-size: 36px;
+	margin: 10px 0;
+	color: #86939e;
+}
+
+.button-size {
+	margin-top: 80px;
+}

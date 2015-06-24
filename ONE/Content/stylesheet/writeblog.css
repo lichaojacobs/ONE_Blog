@@ -1,0 +1,40 @@
+﻿body {
+    padding-top: 70px;
+	background: #eee;
+
+}
+
+
+.content {
+
+    margin:0 auto;
+   
+    width:1000px;
+     padding:30px,100px,30px,100px;
+    
+
+}
+
+label {
+
+    font-size:15px;
+    font-weight:bold;
+}
+
+.blogsidebar {
+
+   border-radius:10px,10px;
+  
+
+}
+
+writearea {
+   
+    padding:30px,100px,30px,100px;
+    background: #fff;
+
+}
+
+
+
+

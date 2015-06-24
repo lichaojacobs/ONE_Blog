@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "我的粉丝";
+}
+
+@model IEnumerable<ONE._07DataEntity.T001用户表>
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-9">
+            @foreach (var m in Model)
+            {
+
+                <div class="col-sm-6 col-md-3">
+                    <div class="thumbnail">
+                        <img data-src="holder.js/100%x200" alt="100%x200" src="@m.头像" data-holder-rendered="true" style="height: 160px; width: 100%; display: block;">
+                        <div class="caption">
+                            <div>
+                                <label class="control-label">姓名：</label>
+                                @m.用户名
+                            </div>
+                            <div>
+                                <label>粉丝数：</label>
+                                @m.粉丝数
+                            </div>
+
+                            <div>
+                                <a role="button" class="btn btn-sm btn-primary" id="followlink" onclick="clickToFollow('@m.用户名')">移除粉丝</a>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+        <div class="col-md-3" style="background-color:#fff;padding:10px;">
+
+            <ul class="nav nav-pills nav-stacked nav-pills-stacked-example">
+                <li role="presentation"><a href="/Home/GetUsers">未关注</a></li>
+                <li role="presentation" ><a href="/Home/GetUsers_HasFollowed">已关注</a></li>
+                <li role="presentation" class="active"><a href="/Home/GetMyFans">我的粉丝</a></li>
+            </ul>
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function clickToFollow(beFollowed) {
+
+        $.post("/Common/followMethod", { "isToFollow": 2, "beFollowed": beFollowed }, function (data, status) {
+
+            if (data != "false") {
+
+                window.location.href = data;
+
+
+            }
+
+        })
+
+
+    }
+
+
+</script>
+
+
+
+
+
+

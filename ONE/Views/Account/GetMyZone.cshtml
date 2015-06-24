@@ -1,0 +1,621 @@
+﻿@{
+    
+    Layout = null;
+    
+}
+
+@model IEnumerable<ONE.Models.BlogViewModel>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <title></title>
+    @*<link rel="shortcut icon" href="logo-small.jpg">
+        <link rel="alternate" type="application/rss+xml" href="http://loftertxt.lofter.com/rss">*@
+    <meta name="Description" content="" />
+    <meta name="color:背景" content="#f2f2f2" />
+    <meta name="color:文字" content="#5d5d5d" />
+    <meta name="color:链接" content="#bbb" />
+    <meta name="color:链接状态" content="#808080" />
+    <meta name="color:博客标题" content="#5d5d5d" />
+    <meta name="color:个人描述" content="#ddd" />
+    <meta name="color:导航链接" content="#5d5d5d" />
+    <meta name="color:导航链接状态" content="#1e1e1e" />
+    <meta name="color:主题" content="#00A99D" />
+    <meta name="group1:" content="正文字号12px#正文字号12px|正文字号14px|正文字号16px" />
+    <meta name="group2:" content="博客标题字号16px#博客标题字号16px|博客标题字号20px|博客标题字号24px" />
+
+    <link href="~/Content/stylesheet/css1.css" rel="stylesheet" />
+    <link href="~/Content/stylesheet/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/stylesheet/buttons.css" rel="stylesheet" />
+    <link href="~/Content/stylesheet/main.css" rel="stylesheet" />
+    <style type="text/css">
+        element.style {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        *[hidefocus] {
+            outline: none;
+        }
+
+        *[hidefocus] {
+            outline: none;
+        }
+
+        .w-top {
+            opacity: 0;
+            filter: alpha(opacity=0);
+            transition: opacity 0.3s;
+            -webkit-transition: opacity 0.3s;
+            -moz-transition: opacity 0.3s;
+            -o-transition: opacity 0.3s;
+        }
+
+        .w-top {
+            position: fixed;
+            _position: absolute;
+            right: 100px;
+            bottom: 30px;
+            z-index: 79;
+            width: 50px;
+            height: 50px;
+            overflow: hidden;
+            text-indent: -2000px;
+            background-position: 0 -934px;
+        }
+
+        .w-top {
+            background: url(/Content/assets/up.png);
+        }
+
+        *[hidefocus] {
+            outline: none;
+        }
+    </style>
+
+    <style>
+        /*
+        * 自定义主题
+        */
+        /* 背景颜色 */
+        body {
+            background: #f2f2f2;
+        }
+        /* 文字颜色 */
+        body {
+            color: #5d5d5d;
+        }
+        /* 链接颜色 */
+        a, .m-cmthot a:hover {
+            color: #bbb;
+        }
+            /* 链接状态颜色 */
+            a:hover {
+                color: #808080;
+            }
+        /* 博客标题颜色 */
+        .m-ttl a, .m-ttl a:hover {
+            color: #5d5d5d;
+        }
+        /* 个人描述颜色 */
+        .m-about, .m-cprt, .m-cprt a, .m-cprt a:hover {
+            color: #ddd;
+        }
+        /* 导航链接颜色 */
+        .m-sch .txt, .m-nav a {
+            color: #5d5d5d;
+        }
+
+        .m-sch .form {
+            border-color: #5d5d5d;
+        }
+        /* 导航链接状态颜色 */
+        .m-nav a:hover {
+            color: #1e1e1e;
+        }
+        /* 主题颜色 */
+        .m-post .ttl a, .m-detail .ttl a {
+            color: #00A99D;
+        }
+
+        /* 正文字号12px 默认 */
+
+
+
+        /* 博客标题字号16px 默认 */
+    </style>
+    <!--[if gte IE 8]>
+    <style>
+    /* 以下代码只对有环绕需求的内容使用。副作用：导致ul和ol的每一个li只有一行 */
+    .m-post-leftimg .text ul,
+    .m-post-leftimg .text ol,
+    .m-detail-leftimg .text ul,
+    .m-detail-leftimg .text ol{padding-left:0;}
+    .m-post-leftimg .text ul li,
+    .m-detail-leftimg .text ul li{list-style:disc inside none;}
+    .m-post-leftimg .text ol li,
+    .m-detail-leftimg .text ol li{list-style:decimal inside none;}
+    .m-post-leftimg .text ul li p,
+    .m-post-leftimg .text ol li p,
+    .m-detail-leftimg .text ul li p,
+    .m-detail-leftimg .text ol li p{vertical-align:bottom;*vertical-align:baseline;display:-moz-inline-box;display:inline-block;*display:inline;zoom:1;margin:0;}
+    .m-post-leftimg .text ul li,
+    .m-post-leftimg .text ol li,
+    .m-detail-leftimg .text ul li,
+    .m-detail-leftimg .text ol li{overflow:hidden;height:27px;line-height:27px;padding-left:2px;}
+    .m-post-leftimg .text ul li p,
+    .m-post-leftimg .text ol li p,
+    .m-detail-leftimg .text ul li p,
+    .m-detail-leftimg .text ol li p{overflow:hidden;width:90%;white-space:nowrap;text-overflow:ellipsis;-o-text-overflow:ellipsis;word-break:keep-all;}
+    </style>
+    <![endif]-->
+</head>
+<body class="p-homepage">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/Blog/Index">一个博客</a>
+            </div>
+            <div class="navbar-collapse collapse navbar-left">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/Blog/Index">首页</a></li>
+                    <li><a href="/Blog/BlogList">归档</a></li>
+                    <li><a href="/Blog/GetMyFavorite">我关注的</a></li>
+                </ul>
+                <form class="navbar-form navbar-left" method="post" action="/Blog/SearchResult">
+                    <div class="form-group">
+                        <input type="text" name="searchKeyWords" class="form-control" placeholder="标题/标签/作者">
+                    </div>
+                    <button type="submit" class="btn btn-default">搜索</button>
+                </form>
+            </div>
+            <div class="navbar-collapse collapse">
+
+                <ul class="nav navbar-nav navbar-right">
+                    @if (User.IsInRole("普通用户"))
+                    {
+
+                        <li style="color:white">
+                            <a>欢迎<small>@User.Identity.Name !</small></a>
+                        </li>
+                        
+                        <li><a href="#">个人中心</a></li>
+                        <li><a href="/Home/LogOff">注销</a></li>
+
+                        <li><a href="/Blog/WriteBlog"><img src="~/Content/assets/write.png" height="20" /></a></li>
+
+
+
+                    }
+                    @if (!User.IsInRole("普通用户"))
+                    {
+
+                        <li><a href="/Home/Login">登陆/注册</a></li>
+
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="g-doc box">
+        <div class="g-sd" >
+            <div class="g-sdc box">
+                <div class="m-hdimg">
+                    @if (ViewBag.figureURL != null)
+                    {
+                        
+                    <a role="button">
+                        <img src="@ViewBag.figureURL" id="userlogo" height="160" />
+                    </a>
+                    }
+                    else
+                    { 
+                        
+                        <a role="button">
+                        <img src="~/Content/assets/defaultfigure.jpg" id="userlogo" height="160" />
+
+                    </a>
+                    
+                    }
+                </div>
+
+                
+
+
+                <div class="m-hdimg" style="color:lightblue;opacity:0.5;"></div>
+                <h1 class="m-ttl">
+                    <a href="#">@ViewBag.username</a>
+                    
+                </h1>
+                <ul class="m-nav">
+
+                    
+                    <li><a type="button" class="" data-toggle="modal" data-target="#exampleModal" data-whatever="">上传头像</a></li>
+
+                    <li><a href="#">粉丝(<span id="fansNumber" style="color:red;"> @ViewBag.fansnumber </span>)</a></li>
+                    <li><a href="/Account/Settings" class="glyphicon glyphicon-asterisk">设置</a></li>
+                    <!-- Search -->
+                    @*<li class="m-sch">
+                        <a id="j-lnksch" href="#">搜索</a>
+                        <form id="j-schform" class="form" method="get" action="/search">
+                            <input type="text" name="q" class="txt" />
+                        </form>
+                    </li>*@
+                </ul>
+
+                <p class="m-about">ONE--个人主页</p>
+
+                <p class="m-cprt">&copy;&nbsp;<a href="#">ONE</a>&nbsp;|&nbsp;Powered by <a href="/Blog/Index">ONE</a></p>
+            </div>
+        </div>
+
+        <div class="g-mn">
+            <div class="g-mnc box">
+
+                <!-- Home page -->
+                <div class="m-postlst box">
+
+                    <div class="m-post  m-post-txt  ">
+                        <div class="ct">
+                            <div class="ctc box">
+                                <h2 class="ttl"><a href="/Blog/Index">ONE，一个让你心旷神怡的博客</a></h2>
+                                <!-- 有缩略图时 -->
+                                <a class="img thumbnail" href="#">
+                                    <img src="~/Content/assets/1.jpg" />
+                                </a>
+                                <div class="text"><p>有没有那么一篇博客，能够让你获益良多？有没有一个网站能够让你身心愉悦？有没有一款设计能够大道至简？ONE值得你拥有…</p><p><br /></p></div>
+
+
+                            </div>
+                        </div>
+                        <div class="info box">
+                            <a class="date" href="#">@System.DateTime.Now.Date</a>
+
+                            <a class="hot" href="#">520</a>
+
+                        </div>
+                    </div>
+
+                    @foreach (var i in Model)
+                    {
+
+                        <div class="m-post  m-post-txt  ">
+                            <div class="ct">
+                                <div class="ctc box">
+
+                                    @Html.Hidden("blogId" + @i.blogId, @i.blogId)
+                                    <h2 class="ttl"><a href="/Blog/BlogDetail?id=@i.blogId">@i.标题</a></h2>
+
+                                    <p style="font-weight:bold">标签： @i.标签</p>
+                                    <!-- 有缩略图时 -->
+
+
+                                    <div class="text">
+                                        @Html.Raw(HttpUtility.HtmlDecode(i.正文))
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="info box">
+                                <a class="date" href="#">@i.发布时间.Date</a>
+
+                                <a class="hot" id="hittag @i.blogId" onclick="clickHit(@i.blogId)">@i.点赞数</a>
+
+                                @if (i.是否公开 == true)
+                                {
+                                    <a class="glyphicon glyphicon-pencil" id="makePrivate @i.blogId" onclick="makePrivate(@i.blogId)">设为自己可见</a>
+                                }
+                                else
+                                {
+                                    <a class="glyphicon glyphicon-pencil" id="makePrivate @i.blogId" onclick="makePrivate(@i.blogId)">设为公开</a>
+                                }
+
+                                @*<a class="glyphicon glyphicon-ban-circle" id="delete @i.blogId" onclick="">删除</a>*@
+
+                            </div>
+                        </div>
+
+
+
+                    }
+
+
+
+
+
+                    <div class="m-post  m-post-txt  ">
+                        <div class="ct">
+                            <div class="ctc box">
+
+
+
+                                <h2 class="ttl"><a href="#">ONE&mdash;&mdash;专注兴趣，分享创作</a></h2>
+                                <!-- 有缩略图时 -->
+
+
+                                <div class="text"><p><strong>精致体验：</strong>ONE--一个追求精致入微的视觉和交互体验，为每一片内容精心度量，让你的视角所触及的每一个像素，都蕴含独具匠心的精致设计。</p><p><strong>极简易用：</strong>ONE--一个在功能方面努力做到简单易用。</p></div>
+
+
+
+
+
+
+                            </div>
+                        </div>
+                        <div class="info box">
+                            <a class="date" href="#">@System.DateTime.Now.Date</a>
+
+                            <a class="hot" href="#">520</a>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+                <!-- Pager -->
+
+
+
+
+            </div>
+        </div>
+
+        <a title="回到顶部" class="w-top" href="#" id="gtotop" hidefocus="true" style="visibility: visible; opacity: 1;">回到顶部</a>
+
+
+
+    </div>
+  
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">上传头像</h4>
+                </div>
+                <form action="/Common/UpLoadPersonalFigure" method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+
+                        @*<div class="form-group">
+                    <label for="recipient-name" class="control-label">Recipient:</label>
+                    <input type="text" class="form-control" id="recipient-name">
+                </div>
+                <div class="form-group">
+                    <label for="message-text" class="control-label">Message:</label>
+                    <textarea class="form-control" id="message-text"></textarea>
+                </div>*@
+                        <input class="form-control" type="file" name="uploadFile" id="file" />
+
+                        <br />
+
+                        <div>
+                            <label class="control-label">预览图：</label>
+                        </div>
+
+
+                        <div>
+                            <img id="previewimg" src="~/Content/assets/defaultfigure.jpg" width="160" height="160" alt="实时预览" />
+                        </div>
+
+                        <div id="image-wrap"></div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="submit" class="btn btn-primary">上传</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="~/Content/javascript/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Content/javascript/bootstrap.min.js"></script>
+    <script src="~/Content/javascript/image-file-visible.js"></script>
+    <script src="~/Content/javascript/js1.js"></script>
+    <script src="~/Content/javascript/js2.js"></script>
+    <script src="~/Content/javascript/js3.js"></script>
+    <script type="text/javascript">
+
+        document.getElementById('file').onchange = function (evt) {
+
+            // 如果浏览器不支持FileReader，则不处理
+
+            if (!window.FileReader) return;
+
+            var files = evt.target.files;
+
+            for (var i = 0, f; f = files[i]; i++) {
+
+                if (!f.type.match('image.*')) {
+
+                    continue;
+
+                }
+                var reader = new FileReader();
+
+                reader.onload = (function (theFile) {
+
+                    return function (e) {
+
+                        // img 元素
+
+                        document.getElementById('previewimg').src = e.target.result;
+
+                    };
+
+                })(f);
+
+
+                reader.readAsDataURL(f);
+
+            }
+
+        }
+
+        function clickHit(id) {
+
+            var currentNumber = document.getElementById("hittag " + id).innerHTML;
+
+            var blogId = document.getElementById("blogId" + id).value;
+
+            $.post("/Common/clickHit", { "blogId": blogId, "currentNumber": currentNumber }, function (data, status) {
+
+                if (data != "false") {
+
+                    document.getElementById("hittag " + id).innerHTML = data;
+
+                }
+
+
+            })
+
+        }
+
+        //$('#myModal').on('shown.bs.modal', function () {
+        //    $('#myInput').focus()
+        //})
+
+        function showuploadtools()
+        {
+
+            //$('#uploadimage').fadeIn("1000");
+            var tool = document.getElementById("uploadimage");
+            tool.style.display = "block";
+            
+
+
+
+        }
+
+        function hideuploadtools()
+        {
+            //$('#uploadimage').fadeOut();
+            var tool = document.getElementById("uploadimage");
+            tool.style.display = "none";
+
+
+        }
+
+        function clickToFollow(beFollowed) {
+            //首先判断是关注还是取消关注
+            var followlink = document.getElementById("followlink").innerHTML;
+            var currentNumber = document.getElementById("fansNumber").innerHTML;
+            if (followlink == "关注") {
+
+
+                $.post("/Common/follow", { "isToFollow": 1, "currentNumber": currentNumber, "beFollowed": beFollowed }, function (data, status) {
+
+                    if (data != "false") {
+
+                        document.getElementById("followlink").innerHTML = "取消关注";
+
+                        document.getElementById("fansNumber").innerHTML = data;
+
+
+                    }
+
+
+
+
+                })
+
+
+
+
+            }
+            else {
+
+                $.post("/Common/follow", { "isToFollow": 0, "currentNumber": currentNumber, "beFollowed": beFollowed }, function (data, status) {
+
+                    if (data != "false") {
+
+                        document.getElementById("followlink").innerHTML = "关注";
+
+                        document.getElementById("fansNumber").innerHTML = data;
+
+
+                    }
+
+
+
+
+                })
+
+
+            }
+
+
+        }
+
+
+        function makePrivate(blogId) {
+
+            var text = document.getElementById("makePrivate " + blogId).innerHTML;
+
+
+            if (text == "设为公开") {
+                $.post("/Common/makePrivate", { "blogId": blogId, "private": "false" }, function (data, status) {
+
+                    if (data == "true") {
+
+                        document.getElementById("makePrivate " + blogId).innerHTML = "设为自己可见";
+
+                    }
+
+
+
+
+                })
+
+            }
+            else
+                if (text == "设为自己可见") {
+                    $.post("/Common/makePrivate", { "blogId": blogId, "private": "true" }, function (data, status) {
+
+                        if (data == "true") {
+
+                            document.getElementById("makePrivate " + blogId).innerHTML = "设为公开";
+
+                        }
+
+
+
+
+                    })
+
+
+                }
+
+
+
+        }
+
+
+
+        $('#exampleModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var recipient = button.data('whatever') // Extract info from data-* attributes
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+            //modal.find('.modal-title').text('New message to ' + recipient)
+            //modal.find('.modal-body input').val(recipient)
+        })
+
+
+
+    </script>
+
+    @*<script src="~/Scripts/modernizr-2.6.2.js"></script>*@
+</body>
+</html>
+

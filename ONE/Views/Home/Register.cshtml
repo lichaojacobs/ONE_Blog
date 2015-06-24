@@ -1,0 +1,56 @@
+﻿@model ONE.Models.RegisterViewModel
+@{
+    Layout = null;
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>注册—— 一个博客</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="~/Content/stylesheet/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/stylesheet/buttons.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/stylesheet/login.css">
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/Blog/Index">一个博客</a>
+        </div>
+    </nav>  
+        <div class="container">
+
+            <form class="form-signin" action="/Home/Register" method="post">
+                <h2 class="form-signin-heading">注册</h2>
+                <label class="sr-only" for="inputEmail">邮箱</label>
+                @Html.TextBoxFor(m => m.注册邮箱, new { type = "email", @class = "form-control", id = "inputEmail", placeholder = "邮箱" })
+
+                @*<input class="form-control" id="inputEmail" type="email" placeholder="邮箱" required autofocus></input>*@
+
+                @Html.ValidationMessageFor(m => m.注册邮箱)
+                <label class="sr-only" for="inputPassword"></label>
+
+                @Html.TextBoxFor(m => m.密码, new { type = "password", @class = "form-control", id = "inputPassword", placeholder = "密码" })
+                @Html.ValidationMessageFor(m => m.密码)
+
+
+                @Html.TextBoxFor(m => m.确认密码, new { type = "password", @class = "form-control", id = "inputPassword", placeholder = "密码" })
+                @Html.ValidationMessageFor(m => m.确认密码)
+                @*<div class="checkbox">
+                    <label><input type="checkbox" value="remember">记住我</label>
+                </div>*@
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
+                <div class="register">
+                    <a href="/Home/Login">登录</a> 或者 <a href="#">忘记密码</a>
+                </div>
+            </form>
+
+        </div>
+
+   
+    <script type="text/javascript" src="~/Content/javascript/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Content/javascript/jquery.min.js"></script>
+    
+</body>
+</html>
