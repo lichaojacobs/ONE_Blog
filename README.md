@@ -2,6 +2,9 @@
 
 一个博客系统（ASP.Net MVC4）
 
+<font style="color:red">上线地址：</font><a href="oneblog.cme.tju.edu.cn">www.oneblog.cn</a>
+
+
 主要功能：攥写博客，设置是否公开，上传图片，评论，回复评论，点赞，关注，取消关注，搜素等主要博客功能
 
 
